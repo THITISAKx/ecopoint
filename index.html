@@ -1,0 +1,130 @@
+<?php 
+include 'nav.php';
+include 'config.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        .hero {
+            height: 80vh;
+            object-fit: cover;
+            width: 100%;
+        }       
+        .p-img{
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+</head> 
+<body>
+    <div class="carousel slide my-2" id="heroCarousel" data-bs-ride="slide">
+        <div class="carousel-indicators carousel-indicators-sm">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-hidden="true"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="งานนำเสนอ3/สไลด์4.PNG" class="d-block hero ">
+            </div>
+            <div class="carousel-item">
+                <img src="งานนำเสนอ3/สไลด์5.PNG" class="d-block hero">
+            </div>
+            <div class="carousel-item">
+                <img src="งานนำเสนอ3/สไลด์6.PNG" class="d-block hero">
+            </div>
+        </div>
+        <div class="carousel-control-prev">
+            <button class="carousel-control-prev-icon" aria-hidden="true" data-bs-slide="prev">
+                <span class="visually-hidden"></span>
+            </button>
+        </div>
+        <div class="carousel-control-next">
+            <button class="carousel-control-next-icon" aria-hidden="true" data-bs-slide="next">
+                <span class="visually-hidden"></span>
+            </button>
+        </div>
+        
+    </div>
+<div class="container justify-content-center align-items-center"> 
+    <div class="card shadow-sm border-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-header bg-success text-light text-center">
+                    <h3 class="fw-bold">ข่าวสาร</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <?php
+                $sl1 = "SELECT * FROM tb_news";
+                $res1 = $conn->query($sl1);
+                while($news = mysqli_fetch_array($res1)){ ?>
+                <div class="col-4">
+                    <div class="card h-100">
+                        <img src="upload/<?php echo $news['n_image'];?>" class="d-block p-img rounded-top-img">
+                        <div class="card-body">
+                            <span class="fw-bold"><?php echo $news['n_topic'];?></span>
+                            <p><?php echo $news['n_detail'];?></p>
+                            <button type="button" class="btn btn-primary btn-sm" >อ่านเพิ่มเติม</button>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="container justify-content-center align-items-center mt-5"> 
+    <div class="card shadow-sm border-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-header bg-dark text-light text-center">
+                    <h3 class="fw-bold mt-2">แลกของรางวัล</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <?php 
+                $sl2 = "SELECT * FROM tb_rewards";
+                $res2 = $conn->query($sl2);
+                while($rw = mysqli_fetch_array($res2)){
+                ?>
+                <div class="col-4 my-3">
+                    <div class="card h-100">
+                        <img src="upload/<?php echo $rw['rw_image'];?>" class="d-block p-img rounded-top-img">
+                        <div class="card-body">
+                            <span class="fw-bold"><?php echo $rw['rw_name'];?></span>
+                            <p>จำนวน Point : <?php echo $rw['rw_point'];?></p>
+                           <a type="button" href="rewards.php" class="btn btn-primary btn-sm">แลกของรางวัล</a>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-success">
+    <div class="bg-dark text-light ">
+        <div class="gap-2">
+            <div class="p-5">
+                <h6 class="fw-bold ms-5">🗨️ ช่องทางการติดด่อ <br><br></h6>
+                <small><p class="ms-5">📞 : 065-7144-757 <br><br>🌐 : mvc.ac.th <br><br>🏠 : วิทยาลัยอาชีวศึกษามหาสารคาม ต.ตลาด อ.เมิอง จ.มหาสารคาม 44400 </p></small>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+</body>
+</html>
